@@ -23,7 +23,7 @@
 	비밀번호 : <%= pass %><br>
 	이름 : <%= name %><br>
 	주소 : <%= addr %><br>
-	성별 : <%= gender %><br>
+	성별 : <%= (gender.equals("1")) ? "남자" : "여자" %><br>
 	취미 : 
 	<%
 		for(String hobby : hobbies){
