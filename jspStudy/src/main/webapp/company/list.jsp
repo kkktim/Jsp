@@ -54,6 +54,7 @@ try{
 </head>
 <body>
 	<h3>직원목록</h3>
+	<a href="./register.jsp">직원등록</a>
 	<table border="1">
 		<tr>
 			<td>아이디</td>

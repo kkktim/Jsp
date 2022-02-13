@@ -2,14 +2,14 @@ package bean;
 
 public class CustBean {
 	
-	private String custid;
+	private int custid;
 	private String name;
 	private String address;
 	private String phone;
-	public String getCustid() {
+	public int getCustid() {
 		return custid;
 	}
-	public void setCustid(String custid) {
+	public void setCustid(int custid) {
 		this.custid = custid;
 	}
 	public String getName() {

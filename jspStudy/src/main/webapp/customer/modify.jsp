@@ -8,6 +8,7 @@
 request.setCharacterEncoding("utf-8");
 String custid = request.getParameter("custid");
 
+
 String host = "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
 String user = "timk";
 String pass = "1234";
@@ -20,12 +21,12 @@ try{
 	Connection conn = DriverManager.getConnection(host, user, pass);
 	Statement stmt = conn.createStatement();
 	
-	String sql = "SELECT * FROM `Customer` WHERE `custid`='"+custid+"';";
-	ResultSet rs = stmt.executeQuery(sql);
+	
+	ResultSet rs = stmt.executeQuery("SELECT * FROM `Customer` WHERE `custid` = "+custid+";");
 	
 	if(rs.next()){
 		
-		cb.setCustid(rs.getString(1));
+		cb.setCustid(rs.getInt(1));
 		cb.setName(rs.getString(2));
 		cb.setAddress(rs.getString(3));
 		cb.setPhone(rs.getString(4));
@@ -49,16 +50,16 @@ try{
 <body>
 	
 	<h3>고객수정</h3>
-	<a></a>
+	<a href="./list.jsp">고객목록</a>
 	<form action="./proc/modifyProc.jsp" method="post">
 		<table border="1">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="custid" value="<%=cb.getCustid() %>" readonly/></td>
+				<td><input type="text" name="custid" readonly value="<%=cb.getCustid()%>"/></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name" value="<%=cb.getName() %>"/></td>
+				<td><input type="text" name="name" value="<%=cb.getName()%>"/></td>
 			</tr>
 			<tr>
 				<td>주소</td>
