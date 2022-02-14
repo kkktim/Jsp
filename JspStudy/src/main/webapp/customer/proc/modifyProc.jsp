@@ -20,12 +20,12 @@ try{
 	Connection conn = DriverManager.getConnection(host, user, pass);
 	
 	String sql = "UPDATE `Customer` SET ";
-	sql += "`name`=?, `address`=?, `phone`=? WHERE `custid`='custid'";
+	sql += "`name`=?, `address`=?, `phone`=? WHERE `custid`=?;";
 	PreparedStatement psmt = conn.prepareStatement(sql);
-	psmt.setString(1, custid);
-	psmt.setString(2, name);
-	psmt.setString(3, address);
-	psmt.setString(4, phone);
+	psmt.setString(4, custid);
+	psmt.setString(1, name);
+	psmt.setString(2, address);
+	psmt.setString(3, phone);
 	
 	psmt.executeUpdate();
 	conn.close();
@@ -34,4 +34,5 @@ try{
 	e.printStackTrace();
 }
 
+response.sendRedirect("../list.jsp");
 %>
