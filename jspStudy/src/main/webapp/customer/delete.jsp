@@ -5,7 +5,6 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String custid = request.getParameter("custid");
-	String uid = request.getParameter("custid");
 	
 	String host = "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
 	String user = "timk";
