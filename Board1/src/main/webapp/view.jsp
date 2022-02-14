@@ -31,8 +31,8 @@
             </table>
             <div>
                 <a href="#" class="btnDelete">삭제</a>
-                <a href="./modify.html" class="btnModify">수정</a>
-                <a href="./list.html" class="btnList">목록</a>
+                <a href="/Board1/modify.jsp" class="btnModify">수정</a>
+                <a href="/Board1/list.jsp" class="btnList">목록</a>
             </div>  
             
             <!-- 댓글리스트 -->

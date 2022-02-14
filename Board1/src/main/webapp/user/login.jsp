@@ -9,7 +9,7 @@
 <body>
     <div id="wrapper">
         <section id="user" class="login">
-            <form action="../list.html">
+            <form action="/Board1/list.jsp">
                 <table border="0">
                     <tr>
                         <td><img src="../img/login_ico_id.png" alt="아이디"/></td>
