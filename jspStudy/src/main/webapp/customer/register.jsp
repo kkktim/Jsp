@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h3>고객등록</h3>
+	<a href="./list.jsp">고객목록</a>
 	<form action="./proc/registerProc.jsp" method="post">
 		<table border="1">
 			<tr>

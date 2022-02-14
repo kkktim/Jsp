@@ -25,7 +25,7 @@ try{
 	while(rs.next()){
 		CustBean cb = new CustBean();
 		
-		cb.setCustid(rs.getString(1));
+		cb.setCustid(rs.getInt(1));
 		cb.setName(rs.getString(2));
 		cb.setAddress(rs.getString(3));
 		cb.setPhone(rs.getString(4));
@@ -47,7 +47,7 @@ try{
 </head>
 <body>
 	<h3>고객목록</h3>
-	<a></a>
+	<a href="./register.jsp">고객등록</a>
 	<table border="1">
 		<tr>
 			<td>아이디</td>
@@ -63,8 +63,8 @@ try{
 			<td><%=cb.getAddress() %></td>
 			<td><%=cb.getPhone() %></td>
 			<td>
-				<a href="./modify.jsp">수정</a>
-				<a href="./delete.jsp">삭제</a>
+				<a href="./modify.jsp?custid=<%=cb.getCustid()%>">수정</a>
+				<a href="./delete.jsp?custid=<%=cb.getCustid()%>">삭제</a>
 			</td>
 		</tr>
 		<%} %>
