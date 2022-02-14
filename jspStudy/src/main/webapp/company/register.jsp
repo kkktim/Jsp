@@ -31,18 +31,13 @@
 						<option>차장</option>
 						<option>부장</option>
 				</select></td>
-			</tr>
-			<tr>
-				<td>부서</td>
-				<td>
-					<select name="dep">
+				<td>부서<select name="dep">
 						<option value="101">영업1부</option>
 						<option value="102">영업2부</option>
 						<option value="103">영업3부</option>
 						<option value="104">영업4부</option>
 						<option value="105">인사부</option>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit" value="등록" />
