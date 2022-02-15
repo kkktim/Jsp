@@ -1,3 +1,5 @@
+<%@page import="kr.co.board1.db.Sql"%>
+<%@page import="kr.co.board1.db.DBConfig"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -16,27 +18,11 @@ String addr1 = request.getParameter("addr1");
 String addr2 = request.getParameter("addr2");
 String regip = request.getRemoteAddr();   //클라이언트 시스템 IP
 
-String host = "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
-String user = "timk";
-String pass = "1234";
 
 try{
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection(host, user, pass);
-	String sql = "INSERT INTO `Board_user` SET ";
-	sql += "`uid`=?,";
-	sql += "`pass`=PASSWORD(?),";
-	sql += "`name`=?,";
-	sql += "`nick`=?,";
-	sql += "`email`=?,";
-	sql += "`hp`=?,";
-	sql += "`zip`=?,";
-	sql += "`addr1`=?,";
-	sql += "`addr2`=?,";
-	sql += "`regip`=?,";
-	sql += "`rdate`=NOW()";
+	Connection conn = DBConfig.getInstance().getConnection();
 	
-	PreparedStatement psmt = conn.prepareStatement(sql);
+	PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_USER);
 	psmt.setString(1, uid);
 	psmt.setString(2, pass1);
 	psmt.setString(3, name);
@@ -50,7 +36,6 @@ try{
 	psmt.executeUpdate();
 	
 	conn.close();
-	
 	
 }catch(Exception e){
 	e.printStackTrace();

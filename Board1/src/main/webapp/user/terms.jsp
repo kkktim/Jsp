@@ -1,3 +1,5 @@
+<%@page import="kr.co.board1.db.Sql"%>
+<%@page import="kr.co.board1.db.DBConfig"%>
 <%@page import="kr.co.board1.bean.TermsBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -6,17 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 //약관내용 가져오기
-String host = "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
-String user = "timk";
-String pass = "1234";
+
 
 TermsBean tb = null;   //선언
 
 try{
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection(host, user, pass);
+	Connection conn = DBConfig.getInstance().getConnection();
 	Statement stmt = conn.createStatement();
-	ResultSet rs = stmt.executeQuery("SELECT * FROM `Board_terms`;");
+	ResultSet rs = stmt.executeQuery(Sql.SELECT_TERMS);
 	
 	if(rs.next()){
 		tb = new TermsBean();   //생성
@@ -34,7 +33,9 @@ try{
 <head>
     <meta charset="UTF-8">
     <title>약관</title>
-    <link rel="stylesheet" href="/Board1/css/style.css"/>    
+    <link rel="stylesheet" href="/Board1/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/Board1/js/terms.js"></script>    
 </head>
 <body>
     <div id="wrapper">
