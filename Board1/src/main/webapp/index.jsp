@@ -7,7 +7,7 @@ UserBean sessUser = (UserBean) session.getAttribute("sessUser");
 if(sessUser == null){
 	pageContext.forward("./user/login.jsp");	
 }else{
-	pageContext.forward("./user/list.jsp");
+	pageContext.forward("./list.jsp");
 }
 
 %>
