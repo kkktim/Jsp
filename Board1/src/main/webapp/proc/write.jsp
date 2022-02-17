@@ -1,3 +1,5 @@
+<%@page import="kr.co.board1.bean.ArticleBean"%>
+<%@page import="kr.co.board1.db.ArticleDao"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.io.File"%>
@@ -24,30 +26,16 @@ String fname = mr.getFilesystemName("fname");
 String uid = mr.getParameter("uid");
 String regip = request.getRemoteAddr();
 
-int id = 0;
-try{
-	Connection conn = DBConfig.getInstance().getConnection();
-	//insert 수행
-	PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-	psmt.setString(1, title);
-	psmt.setString(2, content);
-	psmt.setInt(3, fname == null ? 0 : 1);
-	psmt.setString(4, uid);
-	psmt.setString(5, regip);
-	psmt.executeUpdate();   
-	// 방금 insert한 글 번호 조회
-	Statement stmt = conn.createStatement();
-	ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_ID);
-	
-	if(rs.next()){
-		id = rs.getInt(1);
-	}
-	
-	conn.close();
-	
-}catch(Exception e){
-	e.printStackTrace();
-}
+//작성한 글 입력하기
+ArticleBean article = new ArticleBean();
+article.setTitle(title);
+article.setContent(content);
+article.setUid(uid);
+article.setRegip(regip);
+
+int id = ArticleDao.getInstance().insertArticle(article);
+
+
 //파일첨부 했으면 파일처리 작업
 if(fname != null){
 	//파일명 수정
@@ -64,19 +52,8 @@ if(fname != null){
 	oriFile.renameTo(newFile);
 	
 	//파일테이블 Insert
-	try{
-		Connection conn = DBConfig.getInstance().getConnection();
-		PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
-		psmt.setInt(1, id);
-		psmt.setString(2, fname);
-		psmt.setString(3, newName);
-		psmt.executeUpdate();
-		
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	ArticleDao.getInstance().insertFile(id, fname, newName);
+	
 }//파일처리 작업 끝
 
 response.sendRedirect("/Board1/list.jsp");

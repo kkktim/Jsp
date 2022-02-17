@@ -1,13 +1,56 @@
+<%@page import="kr.co.board1.db.ArticleDao"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.board1.bean.ArticleBean"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="kr.co.board1.db.Sql"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="kr.co.board1.db.DBConfig"%>
 <%@page import="kr.co.board1.bean.UserBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+
 UserBean sessUser = (UserBean) session.getAttribute("sessUser");
 
 if(sessUser == null){
 	response.sendRedirect("/Board1/user/login.jsp?success=103");
 	return;
 }
+//전송 데이터 수신
+request.setCharacterEncoding("utf-8");
+String pg = request.getParameter("pg");
+
+//페이지번호 작업
+int total = ArticleDao.getInstance().selectCountId();
+int lastPageNum = 0;
+
+if(total % 10 == 0){
+	lastPageNum = total / 10;
+}else{
+	lastPageNum = total / 10 + 1;
+}
+
+int currentPg = 1;
+if(pg != null){
+	currentPg = Integer.parseInt(pg);
+}
+
+int start = (currentPg - 1) * 10;
+int pageStartNum = total - start;
+int groupCurrent = (int)Math.ceil(currentPg / 10.0);
+int groupStart = (groupCurrent - 1) * 10 + 1;
+int groupEnd = groupCurrent * 10;
+
+if(groupEnd > lastPageNum){
+	groupEnd = lastPageNum;
+}
+
+//글목록 가져오기
+List<ArticleBean> articles = ArticleDao.getInstance().selectArticles(start);
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,23 +75,29 @@ if(sessUser == null){
                         <th>날짜</th>
                         <th>조회</th>
                     </tr>
+                    <% for(ArticleBean article : articles){ %>
                     <tr>
-                        <td>1</td>
-                        <td><a href="/Board1/view.jsp">테스트 제목입니다.</a>&nbsp;[3]</td>
-                        <td>길동이</td>
-                        <td>20-05-12</td>
-                        <td>12</td>
+                        <td><%= pageStartNum-- %></td>
+                        <td><a href="#"><%=article.getTitle() %></a>&nbsp;[<%=article.getComment() %>]</td>
+                        <td><%=article.getNick() %></td>
+                        <td><%=article.getRdate().substring(2, 10) %></td>
+                        <td><%=article.getHit() %></td>
                     </tr>
+                    <% } %>
                 </table>
             </article>
 
             <!-- 페이지 네비게이션 -->
             <div class="paging">
-                <a href="#" class="prev">이전</a>
-                <a href="#" class="num current">1</a>                
-                <a href="#" class="num">2</a>                
-                <a href="#" class="num">3</a>                
-                <a href="#" class="next">다음</a>
+            	<%if(groupStart > 1){ %>
+                <a href="/Board1/list.jsp?pg=<%=groupStart-1 %>" class="prev">이전</a>
+                <%} %>
+				<%for(int p=groupStart ; p<=groupEnd; p++){ %>                
+                <a href="/Board1/list.jsp?pg=<%=p %>" class="num <%=(currentPg == p) ? "current":"" %>"><%=p %></a>                
+				<%} %>
+				<%if(groupEnd < lastPageNum){ %>
+                <a href="/Board1/list.jsp?pg=<%=groupEnd+1 %>" class="next">다음</a>
+                <%} %>
             </div>
 
             <!-- 글쓰기 버튼 -->
