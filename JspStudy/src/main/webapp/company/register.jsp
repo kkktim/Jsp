@@ -31,7 +31,11 @@
 						<option>차장</option>
 						<option>부장</option>
 				</select></td>
-				<td>부서<select name="dep">
+			</tr>
+			<tr>
+			
+				<td>부서</td>
+				<td><select name="dep">
 						<option value="101">영업1부</option>
 						<option value="102">영업2부</option>
 						<option value="103">영업3부</option>
