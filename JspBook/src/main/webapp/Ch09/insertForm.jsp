@@ -3,10 +3,10 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
-	<title>Insert title here</title>
+	<title>p335</title>
 </head>
 <body>
-	<form action="insertPro.jsp" method="post">
+	<form action="./proc/insertPro.jsp" method="post">
 		<table>
 			<tr>
 				<td class="label"><label for="idt">아이디</label>

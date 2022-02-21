@@ -8,6 +8,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.authentication.Sha256PasswordPlugin;
+
 
 
 public class LogonDBBean {
@@ -33,7 +35,7 @@ public class LogonDBBean {
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
 //		int x = -1;
-//		
-//		
+		
+//		SHA256 sha = SHA256.getInstance();
 //	}
 }
