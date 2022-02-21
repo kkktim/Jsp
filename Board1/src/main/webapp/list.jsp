@@ -78,7 +78,7 @@ List<ArticleBean> articles = ArticleDao.getInstance().selectArticles(start);
                     <% for(ArticleBean article : articles){ %>
                     <tr>
                         <td><%= pageStartNum-- %></td>
-                        <td><a href="#"><%=article.getTitle() %></a>&nbsp;[<%=article.getComment() %>]</td>
+                        <td><a href="/Board1/view.jsp?id=<%=article.getId()%>"><%=article.getTitle() %></a>&nbsp;[<%=article.getComment() %>]</td>
                         <td><%=article.getNick() %></td>
                         <td><%=article.getRdate().substring(2, 10) %></td>
                         <td><%=article.getHit() %></td>

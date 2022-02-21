@@ -33,6 +33,15 @@ public class ArticleBean {
 		this.nick = nick;
 	}
 	
+	//추가필드
+	private FileBean fb;
+	public FileBean getFb() {
+		return fb;
+	}
+	public void setFb(FileBean fb) {
+		this.fb = fb;
+	}
+	
 	
 	public int getId() {
 		return id;
@@ -45,6 +54,9 @@ public class ArticleBean {
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;

@@ -30,6 +30,7 @@ String regip = request.getRemoteAddr();
 ArticleBean article = new ArticleBean();
 article.setTitle(title);
 article.setContent(content);
+article.setFname(fname);
 article.setUid(uid);
 article.setRegip(regip);
 
