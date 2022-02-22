@@ -321,7 +321,9 @@ body {}
 #board.view > .commentForm > form > div {
     text-align: right;
 }
-
+#board.view .commentModifyComplete {
+	display: none;
+}
 /* 게시판-글쓰기 */
 #board.write {}
 #board.write form > div {

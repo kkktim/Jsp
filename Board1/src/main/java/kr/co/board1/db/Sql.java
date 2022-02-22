@@ -3,7 +3,6 @@ package kr.co.board1.db;
 public class Sql {
 	//user
 	public static final String SELECT_TERMS = "SELECT * FROM `Board_terms`;";
-	
 	public static final String INSERT_USER = "INSERT INTO `Board_user` SET "
 			+ "`uid`=?,"
 			+ "`pass`=PASSWORD(?),"
@@ -16,7 +15,6 @@ public class Sql {
 			+ "`addr2`=?,"
 			+ "`regip`=?,"
 			+ "`rdate`=NOW()";
-	
 	public static final String SELECT_USER = "SELECT * FROM `Board_user` WHERE `uid`=? AND `pass`= PASSWORD(?);";
 	
 	//board
@@ -28,13 +26,21 @@ public class Sql {
 			+ "LEFT JOIN `Board_file` AS b "
 			+ "ON a.id=b.parent "
 			+ "WHERE `id`=?";
-	
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick`  FROM `Board_article` AS a "
 			+ "JOIN `Board_user` AS b "
 			+ "ON a.uid=b.uid "
 			+ "WHERE a.parent = 0 "
 			+ "ORDER BY `id` DESC "
 			+ "LIMIT ?, 10;";
+	public static final String SELECT_COMMENTS = "SELECT a.*, b.nick FROM `Board_article` AS a "
+			+ "JOIN `Board_user` AS b ON a.uid=b.uid "
+			+ "WHERE `parent`=? ORDER BY `id` ASC;";
+	
+	public static final String SELECT_MODIFY_ARTICLE = "SELECT a.title, a.content, b.oName FROM `Board_article` AS a "
+			+ "JOIN `Board_file` AS b "
+			+ "ON a.id=b.parent "
+			+ "WHERE `id`=?;";
+	
 	
 	public static final String INSERT_ARTICLE = "INSERT INTO `Board_article` SET "
 			+ "`title`=?,"
@@ -43,14 +49,12 @@ public class Sql {
 			+ "`uid`=?,"
 			+ "`regip`=?,"
 			+ "`rdate`=NOW()";
-	
 	public static final String INSERT_COMMENT = "INSERT INTO `Board_article` SET "
 			+ "`parent`=?,"
 			+ "`content`=?,"
 			+ "`uid`=?,"
 			+ "`regip`=?,"
 			+ "`rdate`=NOW()";
-	
 	public static final String INSERT_FILE = "INSERT INTO `Board_file` SET "
 			+ "`parent`=?,"
 			+ "`oName`=?,"
@@ -59,5 +63,11 @@ public class Sql {
 	
 	public static final String UPDATE_FILE_COUNT = "UPDATE `Board_file` SET `download`=`download` + 1 WHERE `fid`=?;";
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `Board_article` SET `hit` = `hit` + 1 WHERE `id`=?";
-	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `Board_article` SET `comment` = `comment` + 1 WHERE `id`=?";
+	public static final String UPDATE_ARTICLE_COMMENT_PLUS = "UPDATE `Board_article` SET `comment` = `comment` + 1 WHERE `id`=?";
+	
+	public static final String UPDATE_ARTICLE_COMMENT_MINUS = "UPDATE `Board_article` SET `comment` = `comment` - 1 WHERE `id`=?";
+	
+	public static final String UPDATE_COMMENT = "UPDATE `Board_article` SET `content`=? WHERE `id`=?;";
+	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `id`=?";
+			
 }

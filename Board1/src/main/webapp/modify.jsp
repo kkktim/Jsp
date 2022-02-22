@@ -1,4 +1,12 @@
+<%@page import="kr.co.board1.bean.ArticleBean"%>
+<%@page import="kr.co.board1.db.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+String id = request.getParameter("id");
+
+ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,16 +19,16 @@
         <section id="board" class="modify">
             <h3>글수정</h3>
             <article>
-                <form action="#">
+                <form action="/Board1/proc/modify.jsp">
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
+                            <td><input type="text" name="title" value="<%=article.getTitle() %>"/></td>
                         </tr>
                         <tr>
                             <td>내용</td>
                             <td>
-                                <textarea name="content"></textarea>                                
+                                <textarea name="content"><%=article.getContent() %></textarea>                                
                             </td>
                         </tr>
                         <tr>
