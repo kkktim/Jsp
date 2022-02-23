@@ -13,6 +13,7 @@ ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
     <meta charset="UTF-8">
     <title>글수정</title>
     <link rel="stylesheet" href="./css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -21,6 +22,10 @@ ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
             <article>
                 <form action="/Board1/proc/modify.jsp">
                     <table>
+                    	<tr>
+                    		<td><input type="hidden" name="uid" value="<%=article.getUid()%>">
+                    		</td>
+                    	</tr>
                         <tr>
                             <td>제목</td>
                             <td><input type="text" name="title" value="<%=article.getTitle() %>"/></td>
@@ -37,7 +42,7 @@ ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
                         </tr>
                     </table>
                     <div>
-                        <a href="./list.html" class="btnCancel">취소</a>
+                        <a href="/Board1/list.jsp" class="btnCancel">취소</a>
                         <input type="submit"  class="btnWrite" value="수정완료">
                     </div>
                 </form>

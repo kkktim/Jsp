@@ -26,6 +26,7 @@ public class Sql {
 	public static final String SELECT_COUNT_ID = "SELECT COUNT(`id`) FROM `Board_article` "
 			+ "WHERE `parent` = 0;";
 	public static final String SELECT_FILE = "SELECT * FROM `Board_file` WHERE `fid`=?";
+	public static final String SELECT_FILE_BY_PARENT = "SELECT `nName` FROM `Board_file` WHERE `parent`=?";
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Board_article` AS a "
 			+ "LEFT JOIN `Board_file` AS b "
 			+ "ON a.id=b.parent "
@@ -40,7 +41,7 @@ public class Sql {
 			+ "JOIN `Board_user` AS b ON a.uid=b.uid "
 			+ "WHERE `parent`=? ORDER BY `id` ASC;";
 	
-	public static final String SELECT_MODIFY_ARTICLE = "SELECT a.title, a.content, b.oName FROM `Board_article` AS a "
+	public static final String SELECT_MODIFY_ARTICLE = "SELECT a.title, a.content, b.oName, a.id FROM `Board_article` AS a "
 			+ "JOIN `Board_file` AS b "
 			+ "ON a.id=b.parent "
 			+ "WHERE `id`=?;";
@@ -66,12 +67,15 @@ public class Sql {
 			+ "`rdate`=NOW()";
 	
 	public static final String UPDATE_FILE_COUNT = "UPDATE `Board_file` SET `download`=`download` + 1 WHERE `fid`=?;";
+	public static final String UPDATE_ARTICLE = "UPDATE `Board_article` SET `title` = ?, `content` = ? "
+			+ "WHERE `id` = ?;";
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `Board_article` SET `hit` = `hit` + 1 WHERE `id`=?";
 	public static final String UPDATE_ARTICLE_COMMENT_PLUS = "UPDATE `Board_article` SET `comment` = `comment` + 1 WHERE `id`=?";
-	
 	public static final String UPDATE_ARTICLE_COMMENT_MINUS = "UPDATE `Board_article` SET `comment` = `comment` - 1 WHERE `id`=?";
 	
 	public static final String UPDATE_COMMENT = "UPDATE `Board_article` SET `content`=? WHERE `id`=?;";
 	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `id`=?";
-			
+	
+	public static final String DELETE_ARTICLE = "DELETE FROM `Board_article` WHERE `id`=?";
+	public static final String DELETE_FILE = "DELETE FROM `Board_file` WHERE `parent`=?"; 
 }

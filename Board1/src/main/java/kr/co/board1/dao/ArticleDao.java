@@ -184,6 +184,7 @@ public class ArticleDao {
 				article = new ArticleBean();
 				article.setTitle(rs.getString(1));
 				article.setContent(rs.getString(2));
+				article.setUid(rs.getString(4));
 				
 				FileBean fb = new FileBean();
 				fb.setoName(rs.getString(3));
@@ -299,7 +300,19 @@ public class ArticleDao {
 			e.printStackTrace();
 		}
 	}
-	public void updateArticle() {}
+	public void updateArticle(String title, String content, String uid) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, uid);
+			psmt.executeUpdate();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public int updateComment(String content, String id) {
 		int result = 0;
 		try {
@@ -315,8 +328,41 @@ public class ArticleDao {
 		return result;
 	}
 
-	public void deleteArticle() {}
-	
+	public void deleteArticle(String id) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, id);
+			psmt.executeUpdate();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public FileBean deleteFile(String parent, String dfile) {
+		FileBean fb = null;
+		PreparedStatement psmt = null;
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			if(dfile != null) {
+				psmt = conn.prepareStatement(Sql.SELECT_FILE_BY_PARENT);
+				psmt.setString(1, parent);
+				ResultSet rs = psmt.executeQuery();
+				if(rs.next()) {
+					fb = new FileBean();
+					fb.setnName(rs.getString(1));
+				}
+			}
+			psmt = conn.prepareStatement(Sql.DELETE_FILE);
+			psmt.setString(1, parent);
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return fb;
+	}
 	public void deleteComment(String id) {
 		//댓글 삭제하고, 원글 댓글 카운트 -1 동시 수행
 		try {

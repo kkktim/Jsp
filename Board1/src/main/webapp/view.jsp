@@ -87,8 +87,21 @@ List<ArticleBean> comments = dao.selectComments(id);
 						}
 					}
 				})
-			})
-		})
+		}) // 댓글 수정완료 버튼 끝
+		
+		//원글 삭제
+		$('.btnDelete').click(function () {
+			let isArtOk = confirm('정말 삭제 하시겠습니까?');
+			if(isArtOk){
+				return true;
+			}else{
+				return false;
+			}
+		}) // 원글 삭제 끝
+		
+		
+		
+	})
     </script>
 </head>
 <body>
@@ -117,7 +130,7 @@ List<ArticleBean> comments = dao.selectComments(id);
                 </tr>
             </table>
             <div>
-                <a href="#" class="btnDelete">삭제</a>
+                <a href="/Board1/proc/deleteArticle.jsp?id=<%=article.getId()%>&parent=<%=article.getParent()%>&file=<%=article.getFile() %>" class="btnDelete">삭제</a>
                 <a href="/Board1/modify.jsp?id=<%=article.getId() %>" class="btnModify">수정</a>
                 <a href="/Board1/list.jsp" class="btnList">목록</a>
             </div>  
