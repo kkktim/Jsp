@@ -130,7 +130,7 @@ List<ArticleBean> comments = dao.selectComments(id);
                 </tr>
             </table>
             <div>
-                <a href="/Board1/proc/deleteArticle.jsp?id=<%=article.getId()%>&parent=<%=article.getParent()%>&file=<%=article.getFile() %>" class="btnDelete">삭제</a>
+                <a href="/Board1/proc/deleteArticle.jsp?id=<%=article.getId()%>&fid=<%=article.getFb().getFid()%>&dfile=<%=article.getFile() %>" class="btnDelete">삭제</a>
                 <a href="/Board1/modify.jsp?id=<%=article.getId() %>" class="btnModify">수정</a>
                 <a href="/Board1/list.jsp" class="btnList">목록</a>
             </div>  

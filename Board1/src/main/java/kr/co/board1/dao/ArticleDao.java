@@ -339,22 +339,24 @@ public class ArticleDao {
 			e.printStackTrace();
 		}
 	}
-	public FileBean deleteFile(String parent, String dfile) {
+	public FileBean deleteFile(String fid, String dfile) {
 		FileBean fb = null;
 		PreparedStatement psmt = null;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
-			if(dfile != null) {
-				psmt = conn.prepareStatement(Sql.SELECT_FILE_BY_PARENT);
-				psmt.setString(1, parent);
+			//첨부파일이 존재하면 nName 결과 가져오기
+			if(Integer.parseInt(dfile) > 0) {
+				psmt = conn.prepareStatement(Sql.SELECT_FILE_BY_FID);
+				psmt.setString(1, fid);
 				ResultSet rs = psmt.executeQuery();
 				if(rs.next()) {
 					fb = new FileBean();
 					fb.setnName(rs.getString(1));
 				}
 			}
+			//Board_file 테이블에 테이터 삭제하기
 			psmt = conn.prepareStatement(Sql.DELETE_FILE);
-			psmt.setString(1, parent);
+			psmt.setString(1, fid);
 			psmt.executeUpdate();
 			
 			conn.close();
@@ -368,6 +370,18 @@ public class ArticleDao {
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, id);
+			psmt.executeUpdate();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteCommentsByParent(String id) {
+		try {
+			//댓글 삭제하기
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT_BY_PARENT);
 			psmt.setString(1, id);
 			psmt.executeUpdate();
 			conn.close();

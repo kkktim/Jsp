@@ -12,8 +12,13 @@ public class DBConfig {
 	}
 	
 	private DBConfig() {}
-	
-	private final String HOST= "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
+//	//개발용
+//	private final String HOST= "jdbc:mysql://13.124.252.103:3306/rkdxogh1987";
+//	private final String USER = "timk";
+//	private final String PASS = "1234";
+
+	//배포용
+	private final String HOST= "jdbc:mysql://localhost:3306/rkdxogh1987";
 	private final String USER = "timk";
 	private final String PASS = "1234";
 	
