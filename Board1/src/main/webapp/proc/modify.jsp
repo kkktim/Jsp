@@ -2,11 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("utf-8");
-String uid = request.getParameter("uid");
+String id = request.getParameter("id");
 String title = request.getParameter("title");
 String content = request.getParameter("content");
 
-ArticleDao.getInstance().updateArticle(title, content, uid);
+ArticleDao.getInstance().updateArticle(title, content, id);
 
 response.sendRedirect("/Board1/list.jsp");
 

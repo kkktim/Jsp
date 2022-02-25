@@ -177,14 +177,14 @@ public class ArticleDao {
 		ArticleBean article = null;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_MODIFY_ARTICLE);
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_MODIFY_ARTICLE_ADD_FILE);
 			psmt.setString(1, id);
 			ResultSet rs = psmt.executeQuery();
 			if(rs.next()) {
 				article = new ArticleBean();
 				article.setTitle(rs.getString(1));
 				article.setContent(rs.getString(2));
-				article.setUid(rs.getString(4));
+				article.setUid(rs.getString(4));;
 				
 				FileBean fb = new FileBean();
 				fb.setoName(rs.getString(3));
@@ -300,13 +300,13 @@ public class ArticleDao {
 			e.printStackTrace();
 		}
 	}
-	public void updateArticle(String title, String content, String uid) {
+	public void updateArticle(String title, String content, String id) {
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
 			psmt.setString(1, title);
 			psmt.setString(2, content);
-			psmt.setString(3, uid);
+			psmt.setString(3, id);
 			psmt.executeUpdate();
 			conn.close();
 		}catch(Exception e) {

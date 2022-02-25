@@ -5,7 +5,9 @@
 request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 
-ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
+
+ArticleBean article = ArticleDao.getInstance().selectArticle(id);	
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +25,7 @@ ArticleBean article = ArticleDao.getInstance().selectModifyArticle(id);
                 <form action="/Board1/proc/modify.jsp">
                     <table>
                     	<tr>
-                    		<td><input type="hidden" name="uid" value="<%=article.getUid()%>">
+                    		<td><input type="hidden" name="id" value="<%=article.getId() %>">
                     		</td>
                     	</tr>
                         <tr>

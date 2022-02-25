@@ -41,11 +41,11 @@ public class Sql {
 			+ "JOIN `Board_user` AS b ON a.uid=b.uid "
 			+ "WHERE `parent`=? ORDER BY `id` ASC;";
 	
-	public static final String SELECT_MODIFY_ARTICLE = "SELECT a.title, a.content, b.oName, a.id FROM `Board_article` AS a "
+	public static final String SELECT_MODIFY_ARTICLE_ADD_FILE = "SELECT a.title, a.content, b.oName, a.id FROM `Board_article` AS a "
 			+ "JOIN `Board_file` AS b "
 			+ "ON a.id=b.parent "
 			+ "WHERE `id`=?;";
-	
+	public static final String SELECT_MODIFY_ARTICLE = "SELECT `title`, `content` FROM `Board_article` WHERE `id`=672;";
 	
 	public static final String INSERT_ARTICLE = "INSERT INTO `Board_article` SET "
 			+ "`title`=?,"
