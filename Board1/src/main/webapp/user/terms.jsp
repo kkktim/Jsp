@@ -1,3 +1,4 @@
+<%@page import="kr.co.board1.log.MyLog"%>
 <%@page import="kr.co.board1.db.Sql"%>
 <%@page import="kr.co.board1.db.DBConfig"%>
 <%@page import="kr.co.board1.bean.TermsBean"%>
@@ -7,9 +8,8 @@
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+MyLog.getInstance().info("terms page");
 //약관내용 가져오기
-
-
 TermsBean tb = null;   //선언
 
 try{

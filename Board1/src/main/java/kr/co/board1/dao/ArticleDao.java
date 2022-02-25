@@ -11,6 +11,7 @@ import kr.co.board1.bean.ArticleBean;
 import kr.co.board1.bean.FileBean;
 import kr.co.board1.db.DBConfig;
 import kr.co.board1.db.Sql;
+import kr.co.board1.log.MyLog;
 
 public class ArticleDao {
 	
@@ -24,6 +25,7 @@ public class ArticleDao {
 	
 	//CRUD 메서드 정의
 	public void insertFile(int id, String fname, String newName) {
+		MyLog.getInstance().error("insertFile start...");
 		try{
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
@@ -36,10 +38,12 @@ public class ArticleDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	
 	public int insertArticle(ArticleBean article) {
+		MyLog.getInstance().error("insertArticle start...");
 		try{
 			Connection conn = DBConfig.getInstance().getConnection();
 			//INSERT 수행
@@ -55,11 +59,13 @@ public class ArticleDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		// 방금 INSERT한 글 번호 조회
 		return selectMaxId();
 	}
 	public void insertComment(ArticleBean article) {
+		MyLog.getInstance().error("insertComment start...");
 		try{
 			Connection conn = DBConfig.getInstance().getConnection();
 			//INSERT 수행
@@ -74,12 +80,13 @@ public class ArticleDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		// 방금 INSERT한 글 번호 조회
 	}
 	
 	public int selectMaxId() {
-
+		MyLog.getInstance().error("selectMaxId start...");
 		int id = 0;
 		try {
 			
@@ -91,11 +98,13 @@ public class ArticleDao {
 				id = rs.getInt(1);
 			}
 		}catch(Exception e) {
+			MyLog.getInstance().error(e.getMessage());
 			e.printStackTrace();
 		}
 		return id;
 	}
 	public int selectCountId() {
+		MyLog.getInstance().error("selectCountId start...");
 		int total = 0;
 		try{
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -107,11 +116,13 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return total;
 	}
 	
 	public FileBean selectFile(String fid) {
+		MyLog.getInstance().error("selectFile start...");
 		FileBean fb = null;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -130,10 +141,12 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return fb;
 	}
 	public ArticleBean selectArticle(String id) {
+		MyLog.getInstance().error("selectArticle start...");
 		ArticleBean article = null;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -169,11 +182,13 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e ){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return article;
 	}
 	
 	public ArticleBean selectModifyArticle(String id) {
+		MyLog.getInstance().error("selectModifyArticle start...");
 		ArticleBean article = null;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -194,16 +209,17 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return article;
 	}
 	
 	public List<ArticleBean> selectArticles(int start) {
 		
-		List<ArticleBean> articles = new ArrayList();
+		List<ArticleBean> articles = new ArrayList<>();
+		MyLog.getInstance().error("selectArticles...");
 
 		try{
-			
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
 			psmt.setInt(1, start);
@@ -228,10 +244,12 @@ public class ArticleDao {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return articles;
 	}
 	public List<ArticleBean> selectComments(String parent) {
+		MyLog.getInstance().error("selectComments start...");
 		List<ArticleBean> comments = new ArrayList<ArticleBean>();
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -254,11 +272,13 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return comments;
 	}
 	
 	public void updateFileCount(int fid) {
+		MyLog.getInstance().error("updateFileCount start...");
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_FILE_COUNT);
@@ -268,9 +288,11 @@ public class ArticleDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public void updateArticleHit(int id) {
+		MyLog.getInstance().error("updateArticleHit start...");
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_HIT);
@@ -280,9 +302,11 @@ public class ArticleDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public void updateArticleComment(String id, boolean isPlus) {
+		MyLog.getInstance().error("updateArticleComment start...");
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = null;
@@ -298,9 +322,11 @@ public class ArticleDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public void updateArticle(String title, String content, String id) {
+		MyLog.getInstance().error("updateArticle start...");
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
@@ -311,9 +337,11 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public int updateComment(String content, String id) {
+		MyLog.getInstance().error("updateComment start...");
 		int result = 0;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -324,11 +352,13 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return result;
 	}
 
 	public void deleteArticle(String id) {
+		MyLog.getInstance().error("deleteArticle start...");
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
@@ -337,9 +367,11 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public FileBean deleteFile(String fid, String dfile) {
+		MyLog.getInstance().error("deleteFile start...");
 		FileBean fb = null;
 		PreparedStatement psmt = null;
 		try {
@@ -362,10 +394,12 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 		return fb;
 	}
 	public void deleteComment(String id) {
+		MyLog.getInstance().error("deleteComment start...");
 		//댓글 삭제하고, 원글 댓글 카운트 -1 동시 수행
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -375,9 +409,11 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 	public void deleteCommentsByParent(String id) {
+		MyLog.getInstance().error("deleteCommentsByParent start...");
 		try {
 			//댓글 삭제하기
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -387,6 +423,7 @@ public class ArticleDao {
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			MyLog.getInstance().error(e.getMessage());
 		}
 	}
 }

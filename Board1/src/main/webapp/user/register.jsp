@@ -1,4 +1,6 @@
+<%@page import="kr.co.board1.log.MyLog"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<% MyLog.getInstance().info("register page"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

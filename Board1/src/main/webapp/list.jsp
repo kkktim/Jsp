@@ -1,3 +1,4 @@
+<%@page import="kr.co.board1.log.MyLog"%>
 <%@page import="kr.co.board1.dao.ArticleDao"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.util.ArrayList"%>
@@ -18,9 +19,14 @@ if(sessUser == null){
 	response.sendRedirect("/Board1/user/login.jsp?success=103");
 	return;
 }
+
+MyLog.getInstance().info("list - 1");
+
 //전송 데이터 수신
 request.setCharacterEncoding("utf-8");
 String pg = request.getParameter("pg");
+
+MyLog.getInstance().info("list pg: "+pg);
 
 //페이지번호 작업
 int total = ArticleDao.getInstance().selectCountId();
@@ -46,6 +52,8 @@ int groupEnd = groupCurrent * 10;
 if(groupEnd > lastPageNum){
 	groupEnd = lastPageNum;
 }
+
+MyLog.getInstance().info("list 3");
 
 //글목록 가져오기
 List<ArticleBean> articles = ArticleDao.getInstance().selectArticles(start);

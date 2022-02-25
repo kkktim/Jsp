@@ -1,7 +1,10 @@
+<%@page import="kr.co.board1.log.MyLog"%>
 <%@page import="kr.co.board1.bean.ArticleBean"%>
 <%@page import="kr.co.board1.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+MyLog.getInstance().info("modify page");
+
 request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 

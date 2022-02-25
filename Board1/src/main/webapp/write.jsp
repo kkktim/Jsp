@@ -1,3 +1,4 @@
+<%@page import="kr.co.board1.log.MyLog"%>
 <%@page import="kr.co.board1.bean.UserBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -6,6 +7,8 @@ if(sessUser == null){
 	response.sendRedirect("/Board1/user/login.jsp?success=103");
 	return;
 }
+
+MyLog.getInstance().info("write page");
 %>
 <!DOCTYPE html>
 <html lang="en">
