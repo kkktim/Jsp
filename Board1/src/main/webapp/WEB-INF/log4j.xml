@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+<!--
+		출력 레이아웃 패턴 
+		# [%d{yyyy-MM-dd HH:mm:ss}] : d는 시간 출력 
+		# [%-5p] : p는 로그 레벌 출력(-5는 좌측(-)정렬, 5칸)
+		# [%c{1}:%L] - : 클래스명(1레벨로, 클래스명만), L은 라인번호
+		# %m%n : m은 에러메시지 출력후 n은 개행문자
+	-->
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+    	<PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+    </Console>
+    <File name="file" fileName="/home/log/Board1.log" append="true">
+    	<PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+    </File>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="file"/>
+    </Root>
+  </Loggers>
+</Configuration>
