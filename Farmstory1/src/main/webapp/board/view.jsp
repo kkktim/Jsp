@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<%
+request.setCharacterEncoding("utf-8");
+String cate = request.getParameter("cate");
+String type = request.getParameter("type");
+
+pageContext.include("./inc/_"+cate+".jsp");
+%>
         <section id="board" class="view">
             <h3>글보기</h3>
             <table>
@@ -23,8 +30,8 @@
             </table>
             <div>
                 <a href="#" class="btnDelete">삭제</a>
-                <a href="./modify.html" class="btnModify">수정</a>
-                <a href="./list.html" class="btnList">목록</a>
+                <a href="/Farmstory1/board/modify.jsp?cate=<%=cate %>&type=<%=type %>" class="btnModify">수정</a>
+                <a href="/Farmstory1/board/list.jsp?cate=<%=cate %>&type=<%=type %>" class="btnList">목록</a>
             </div>  
             
             <!-- 댓글리스트 -->
@@ -59,4 +66,11 @@
             </section>
 
         </section>
+        
+			<!-- 내용 끝 -->
+
+		</article>
+	</section>
+
+</div>
 <%@ include file="../_footer.jsp" %>

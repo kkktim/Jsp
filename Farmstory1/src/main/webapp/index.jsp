@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp"  %>
+<%
+
+%>
 <main>
 	<div class="slider">
 
@@ -11,7 +14,7 @@
 
 		<img src="./img/main_slide_img_tit.png" alt="사람과 자연을 사랑하는 팜스토리" />
 
-		<div class="banner">
+		<div class="banner" OnClick="location.href='/Farmstory1/board/list.jsp?cate=market'"style="cursor:pointer;">
 			<img src="./img/main_banner_txt.png" alt="GRAND OPEN" /> <img
 				src="./img/main_banner_tit.png" alt="팜스토리 오픈기념 30% 할인 이벤트" /> <img
 				src="./img/main_banner_img.png" alt="과일" />
@@ -19,13 +22,13 @@
 	</div>
 
 	<div class="quick">
-		<a href="/Farmstory1/board/list.jsp?cate=community?type=menu"><img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단"></a>
-		<a href="/Farmstory1/board/list.jsp?cate=community?type=chef"><img src="./img/main_banner_sub2_tit.png" alt="나도 요리사"></a>
+		<a href="/Farmstory1/board/list.jsp?cate=community&type=menu"><img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단"></a>
+		<a href="/Farmstory1/board/list.jsp?cate=community&type=chef"><img src="./img/main_banner_sub2_tit.png" alt="나도 요리사"></a>
 	</div>
 
 	<div class="latest">
 		<div>
-			<a href="#"><img src="./img/main_latest1_tit.png" alt="텃밭 가꾸기" /></a>
+			<a href="/Farmstory1/board/list.jsp?cate=croptalk&type=grow"><img src="./img/main_latest1_tit.png" alt="텃밭 가꾸기" /></a>
 			<img src="./img/main_latest1_img.jpg" alt="이미지" />
 			<table border="0">
 				<tr>
@@ -56,7 +59,7 @@
 			</table>
 		</div>
 		<div>
-			<a href="#"><img src="./img/main_latest2_tit.png" alt="귀농학교" /></a> <img
+			<a href="/Farmstory1/board/list.jsp?cate=croptalk&type=school"><img src="./img/main_latest2_tit.png" alt="귀농학교" /></a> <img
 				src="./img/main_latest2_img.jpg" alt="이미지" />
 			<table border="0">
 				<tr>
@@ -87,7 +90,7 @@
 			</table>
 		</div>
 		<div>
-			<a href="#"><img src="./img/main_latest3_tit.png" alt="농작물 이야기" /></a>
+			<a href="/Farmstory1/board/list.jsp?cate=croptalk&type=story"><img src="./img/main_latest3_tit.png" alt="농작물 이야기" /></a>
 			<img src="./img/main_latest3_img.jpg" alt="이미지" />
 			<table border="0">
 				<tr>
@@ -129,9 +132,9 @@
 					src="./img/main_sub2_cs_txt.png" alt="1666-777" />
 			</div>
 			<div>
-				<a href="#"><img src="./img/main_sub2_cs_bt1.png" alt="" /></a> <a
-					href="#"><img src="./img/main_sub2_cs_bt2.png" alt="" /></a> <a
-					href="#"><img src="./img/main_sub2_cs_bt3.png" alt="" /></a>
+				<a href="/Farmstory1/board/list.jsp?cate=community&type=qna"><img src="./img/main_sub2_cs_bt1.png" alt="" /></a> 
+				<a href="/Farmstory1/board/list.jsp?cate=community&type=faq"><img src="./img/main_sub2_cs_bt2.png" alt="" /></a> 
+				<a href="https://parcel.epost.go.kr/auth.EpostLogin.parcel" target="_blank"><img src="./img/main_sub2_cs_bt3.png" alt="" /></a>
 			</div>
 
 		</div>

@@ -1,7 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<%
+request.setCharacterEncoding("utf-8");
+String success = request.getParameter("success");
+String cate = request.getParameter("cate");
+String type = request.getParameter("type");
+%>
 <section id="user" class="login">
-	<form action="../list.html">
+	<form action="/Farmstory1/user/proc/login.jsp" method="post">
+		<input type="hidden" name="cate" value="<%=cate %>" />
+		<input type="hidden" name="type" value="<%=type %>" />
 		<table border="0">
 			<tr>
 				<td><img src="../img/login_ico_id.png" alt="아이디" /></td>
