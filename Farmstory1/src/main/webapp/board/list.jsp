@@ -1,3 +1,6 @@
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
@@ -6,6 +9,17 @@ String cate = request.getParameter("cate");
 String type = request.getParameter("type");
 
 pageContext.include("./inc/_"+cate+".jsp");
+
+
+//전체 게시판 글 갯수
+ArticleDao dao = ArticleDao.getInstance();
+int total = dao.selectCountTotal(type);
+//페이지 번호 작업
+int start = 0;
+int pageStartNum = total - start;
+
+//글 가져오기
+List<ArticleBean> articles = dao.selectArticles(type, start);
 %>
 
 			
@@ -20,13 +34,15 @@ pageContext.include("./inc/_"+cate+".jsp");
 				<th>날짜</th>
 				<th>조회</th>
 			</tr>
+			<%for(ArticleBean article : articles){ %>
 			<tr>
-				<td>1</td>
-				<td><a href="/Farmstory1/board/view.jsp?cate=<%=cate %>&type=<%=type %>">테스트 제목입니다.</a>&nbsp;[3]</td>
-				<td>길동이</td>
-				<td>20-05-12</td>
-				<td>12</td>
+				<td><%=pageStartNum-- %></td>
+				<td><a href="/Farmstory1/board/view.jsp?cate=<%=cate %>&type=<%=type %>&no=<%=article.getNo()%>"><%=article.getTitle() %></a>&nbsp;[<%=article.getComment() %>]</td>
+				<td><%=article.getNick()%></td>
+				<td><%=article.getRdate().substring(2, 10) %></td>
+				<td><%=article.getHit() %></td>
 			</tr>
+			<%} %>
 		</table>
 	</article>
 

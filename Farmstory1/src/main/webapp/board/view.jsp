@@ -1,18 +1,43 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
+String no = request.getParameter("no");
 String cate = request.getParameter("cate");
 String type = request.getParameter("type");
 
+if(sessUser == null){
+%>
+<script>
+	alert('로그인 후 이용하시기 바랍니다.')
+	location.href="/Farmstory1/user/login.jsp?cate=<%=cate%>&type=<%=type%>"
+</script>
+<%
+	return;
+}
+
 pageContext.include("./inc/_"+cate+".jsp");
+
+//글 가져오기
+ArticleDao dao = ArticleDao.getInstance();
+ArticleBean article = dao.selectArticle(no);
+
+//댓글 가져오기
+List<ArticleBean> comments = dao.selectComments(no);
+
+//조회수 +1
+
 %>
         <section id="board" class="view">
             <h3>글보기</h3>
             <table>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="title" value="제목입니다." readonly/></td>
+                    <td><input type="text" name="title" value="<%=article.getTitle()%>" readonly/></td>
                 </tr>
                 <tr>
                     <td>첨부파일</td>
@@ -24,7 +49,7 @@ pageContext.include("./inc/_"+cate+".jsp");
                 <tr>
                     <td>내용</td>
                     <td>
-                        <textarea name="content" readonly>내용 샘플입니다.</textarea>
+                        <textarea name="content" readonly><%=article.getContent()%></textarea>
                     </td>
                 </tr>
             </table>
@@ -37,17 +62,19 @@ pageContext.include("./inc/_"+cate+".jsp");
             <!-- 댓글리스트 -->
             <section class="commentList">
                 <h3>댓글목록</h3>
+                <%for(ArticleBean comment : comments) {%>
                 <article class="comment">
                     <span>
-                        <span>길동이</span>
-                        <span>20-05-13</span>
+                        <span><%=comment.getNick() %></span>
+                        <span><%=comment.getRdate() %></span>
                     </span>
-                    <textarea name="comment" readonly>댓글 샘플입니다.</textarea>
+                    <textarea name="comment" readonly><%=comment.getContent() %></textarea>
                     <div>
                         <a href="#">삭제</a>
                         <a href="#">수정</a>
                     </div>
                 </article>
+                <%} %>
                 <p class="empty">
                     등록된 댓글이 없습니다.
                 </p>
@@ -56,7 +83,11 @@ pageContext.include("./inc/_"+cate+".jsp");
             <!-- 댓글입력폼 -->
             <section class="commentForm">
                 <h3>댓글쓰기</h3>
-                <form action="#">
+                <form action="/Farmstory1/board/proc/comment.jsp?">
+                    <input type="hidden" name="no" value="<%=no %>" />
+                    <input type="hidden" name="cate" value="<%=cate %>" />
+                    <input type="hidden" name="type" value="<%=type %>" />
+                    <input type="hidden" name="uid" value="<%=sessUser.getUid()%>" />
                     <textarea name="comment"></textarea>
                     <div>
                         <a href="#" class="btnCancel">취소</a>
