@@ -43,7 +43,9 @@
 - Ch04 JSP페이지의 내장 객체와 영역
 - Ch05 JSP페이지의 액션 태그
 - Ch09 데이터베이스와 JSP의 연동
-- Ch010 쿠키와 세션
+- Ch10 쿠키와 세션
+- Ch14 표현언어(EL)
+- Ch15 JSTL
 
 ## JspStudy
 ------
@@ -53,6 +55,11 @@
 - Sub4
 - Sub5
 - Sub6
+- Sub7
+	- EL
+	- JSTL
+- Sub8
+	- Servlet
 ------
 - _member 실습
 - company 실습
