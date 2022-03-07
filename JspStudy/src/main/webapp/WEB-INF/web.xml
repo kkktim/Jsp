@@ -18,4 +18,27 @@
   <listener>
   	<listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
   </listener>
+  
+  <!-- HelloServlet 등록 설정 -->
+  <servlet>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<servlet-class>servlet.HelloServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<url-pattern>/Sub8/HelloServlet.do</url-pattern>
+  </servlet-mapping>
+
+  <!-- WelcomeServlet 등록 설정 -->
+  <servlet>
+  	<servlet-name>WelcomeServlet</servlet-name>
+  	<servlet-class>servlet.WelcomeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>WelcomeServlet</servlet-name>
+  	<url-pattern>/Sub8/WelcomeServlet.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
