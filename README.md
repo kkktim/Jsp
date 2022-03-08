@@ -46,6 +46,7 @@
 - Ch10 쿠키와 세션
 - Ch14 표현언어(EL)
 - Ch15 JSTL
+- Ch17 모델2 기반의 MVC 패턴
 
 ## JspStudy
 ------
@@ -60,6 +61,7 @@
 	- JSTL
 - Sub8
 	- Servlet
+	- MVX
 ------
 - _member 실습
 - company 실습
