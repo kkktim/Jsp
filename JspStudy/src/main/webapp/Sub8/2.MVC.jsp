@@ -18,6 +18,9 @@
 </head>
 <body>
 	<h3>2.MVC(Model2) 실습하기</h3>
-	
+	<a href="/JspStudy/Sub8/MVC.do"></a>
+	<a href="/JspStudy/mvc/hello.do">hello.do</a>
+	<a href="/JspStudy/mvc/welcome.do"></a>
+	<a href="/JspStudy/mvc/greeting.do"></a>
 </body>
 </html>

@@ -70,6 +70,9 @@ public class MainController extends HttpServlet {
 	}// doPost end...
 	
 	protected void requestProc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//전송 request 문자셋 설정
+		req.setCharacterEncoding("utf-8");
+		
 		//요청주소에서 service객체의 key 구하기
 		String path = req.getContextPath();
 		String uri = req.getRequestURI();
@@ -79,11 +82,16 @@ public class MainController extends HttpServlet {
 		CommonService service = (CommonService) instances.get(key);;
 		
 		//service 객체 실행 후 view 리턴 받기
-		String view = service.businessProc(req, resp);
+		String result = service.businessProc(req, resp);
+		if(result.startsWith("redirect:")) {
+			String redirectUrl = result.substring(9);
+			resp.sendRedirect(redirectUrl);
+		}else {
+			//view 포워드
+			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
+			dispatcher.forward(req, resp);
+		}
 		
-		//view 포워드
-		RequestDispatcher dispatcher = req.getRequestDispatcher(view);
-		dispatcher.forward(req, resp);
 	}//requestProc end...
 	
 }
