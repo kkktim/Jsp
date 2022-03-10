@@ -60,6 +60,8 @@
 	- EL
 	- JSTL
 - Sub8
+	- customer(model2) 실습
+	- member(model2) 실습
 	- Servlet
 	- MVX
 ------
