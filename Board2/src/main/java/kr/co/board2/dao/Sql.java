@@ -24,8 +24,8 @@ public class Sql {
 	public static final String SELECT_USER = "SELECT * FROM `Board_user` WHERE `uid`=? AND `pass`=PASSWORD(?)";
 	
 	// board
-	public static final String SELECT_MAX_ID   = "SELECT MAX(`id`) FROM `Board_article`";
-	public static final String SELECT_COUNT_ID = "SELECT COUNT(`id`) FROM `Board_article` WHERE `parent`=0";
+	public static final String SELECT_MAX_NO   = "SELECT MAX(`no`) FROM `Board_article`";
+	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `Board_article` WHERE `parent`=0 AND `type` IS NULL;";
 	public static final String SELECT_FILE     = "SELECT * FROM `Board_file` WHERE `fid`=?";
 	public static final String SELECT_ARTICLE  = "SELECT * FROM `Board_article` AS a "
 												+ "LEFT JOIN `Board_file` AS b "
@@ -35,7 +35,7 @@ public class Sql {
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick` FROM `Board_article` AS a "
 												+ "JOIN `Board_user` AS b "
 												+ "ON a.uid = b.uid "
-												+ "WHERE a.parent = 0 "
+												+ "WHERE a.parent = 0 AND a.type IS NULL "
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	

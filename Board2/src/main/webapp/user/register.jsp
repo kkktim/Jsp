@@ -8,6 +8,7 @@
     <script src="/Board2/js/zipcode.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/Board2/js/validation.js"></script>
     <script>
 	// 정규식 표현
     let reUid  = /^[a-z]+[a-z0-9]{3,9}$/;
@@ -97,7 +98,8 @@
                     <tr>
                         <td>이름</td>
                         <td>
-                            <input type="text" name="name" placeholder="이름 입력"/>                            
+                            <input type="text" name="name" placeholder="이름 입력"/>   
+                            <span class="resultName"></span>                         
                         </td>
                     </tr>
                     <tr>

@@ -13,7 +13,7 @@ public class CheckUidService implements CommonService {
 	@Override
 	public String businessProc(HttpServletRequest req, HttpServletResponse resp) {
 		String uid = req.getParameter("uid");
-		int count = UserDao.getInstance().selectCountUid(uid);
+		int count = UserDao.getInstance().selectCountUser(uid, 1);
 		//json data »ý¼º
 		JsonObject json = new JsonObject();
 		json.addProperty("result", count);

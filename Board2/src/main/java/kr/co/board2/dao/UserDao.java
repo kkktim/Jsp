@@ -36,12 +36,17 @@ public class UserDao {
 		}
 		return tv;
 	}
-	public int selectCountUid(String uid) {
+	public int selectCountUser(String info, int what) {
 		int count = 0;
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
-			psmt.setString(1, uid);
+			PreparedStatement psmt = null;
+			if(what == 1) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
+			}else if(what == 2) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
+			}
+			psmt.setString(1, info);
 			
 			ResultSet rs = psmt.executeQuery();
 			if(rs.next()) {

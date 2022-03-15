@@ -8,8 +8,6 @@ let reNick = /^[a-z가-힣0-9]{2,5}$/;
 //최종 유효성 검사에 사용될 변수 
 let isNameOk  = false;
 let isNickOk  = false;
-let isEmailOk = false;
-let isHpOk    = false;
 
 $(function(){
 	//이름 유효성 검사
@@ -17,10 +15,10 @@ $(function(){
 		let name = $(this).val()
 		
 		if(reName.test(name)){
-			$('.resultname').text('')
+			$('.resultName').text('')
 			isNameOk = true;
 		}else{
-			$('.resultname').text('color', 'red').text('이름을 한글로 2자 이상 입력해주세요.')
+			$('.resultName').text('color', 'red').text('이름을 한글로 2자 이상 입력해주세요.')
 			isNameOk = false;
 		}
 	})
@@ -28,10 +26,12 @@ $(function(){
 	//닉네임 중복체크
 	$('input[name=nick]').focusout(function(){
 		let nick = $(this).val()
-		let jsonData = {'nick':nick}
+		let jsonData = {"nick":nick}
+		console.log(jsonData)
 		
 		$.get('/Board2/user/checkNick.do', jsonData, function(data){
 			if(data.result > 0){
+				console.log(data)
 				$('.resultNick').css('color', 'red').text('이미 사용중인 별명 입니다.')
 				isNickOk = false;
 			}else{
