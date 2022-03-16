@@ -19,7 +19,6 @@ public class ListService implements CommonService {
 		HttpSession sess = req.getSession();
 		UserVo uv = (UserVo) sess.getAttribute("sessUser");
 		
-		
 		if(uv == null) {
 			return "redirect:/Board2/user/login.do";
 		}else {

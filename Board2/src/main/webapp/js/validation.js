@@ -28,10 +28,10 @@ $(function(){
 		let nick = $(this).val()
 		let jsonData = {"nick":nick}
 		console.log(jsonData)
-		
 		$.get('/Board2/user/checkNick.do', jsonData, function(data){
+			
 			if(data.result > 0){
-				console.log(data)
+				console.log(data.result)
 				$('.resultNick').css('color', 'red').text('이미 사용중인 별명 입니다.')
 				isNickOk = false;
 			}else{
@@ -44,6 +44,6 @@ $(function(){
 					isNickOk = false;
 				}
 			}
-		})
+		}, 'json')
 	})
 })

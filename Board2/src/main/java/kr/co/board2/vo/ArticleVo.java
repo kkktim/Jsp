@@ -13,6 +13,16 @@ public class ArticleVo {
 	private String regip;
 	private String rdate;
 	
+	
+	//추가필드-FileVo fv
+	private FileVo fv;
+	public FileVo getFv() {
+		return fv;
+	}
+	public void setFv(FileVo fv) {
+		this.fv = fv;
+	}
+	
 	//추가필드-fname
 	private String fname;
 	public String getFname() {
@@ -23,6 +33,7 @@ public class ArticleVo {
 	}
 	//추가필드-nick
 	private String nick;
+	
 	public String getNick() {
 		return nick;
 	}
@@ -41,6 +52,9 @@ public class ArticleVo {
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;

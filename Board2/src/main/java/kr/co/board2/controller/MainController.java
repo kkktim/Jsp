@@ -85,6 +85,9 @@ public class MainController extends HttpServlet {
 			resp.sendRedirect(redirectUrl);
 		}else if(result.startsWith("json:")){
 			//json Ãâ·Â
+			resp.setContentType("application/json;charset=UTF-8");
+			resp.setCharacterEncoding("utf-8");
+			
 			PrintWriter out = resp.getWriter();
 			out.print(result.substring(5));
 		}else {
