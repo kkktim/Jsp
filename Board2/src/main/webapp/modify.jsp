@@ -13,6 +13,7 @@
             <article>
                 <form action="/Board2/modify.do" method="post">
                     <table>
+                    	<input type="hidden" name="no" value="${av.no }"/>
                         <tr>
                             <td>제목</td>
                             <td><input type="text" name="title" value="${av.title }"/></td>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import kr.co.board2.db.DBConfig;
+import kr.co.board2.db.Sql;
 import kr.co.board2.vo.TermsVo;
 import kr.co.board2.vo.UserVo;
 

@@ -1,8 +1,12 @@
 package kr.co.board2.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -69,7 +73,6 @@ public class MainController extends HttpServlet {
 	}// doPost end...
 	
 	protected void requestProc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		//요청주소에서 service객체의 key 구하기
 		String path = req.getContextPath();
 		String uri = req.getRequestURI();
@@ -90,6 +93,38 @@ public class MainController extends HttpServlet {
 			
 			PrintWriter out = resp.getWriter();
 			out.print(result.substring(5));
+		}else if(result.startsWith("file:")) {
+			//파일 전송(파일 다운로드)
+			String oName = (String) req.getAttribute("oName");
+			String nName = (String) req.getAttribute("nName");
+			
+			// 파일 다운로드 response 헤더수정	
+			resp.setContentType("application/octet-stream");
+			resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(oName, "utf-8"));
+			resp.setHeader("Content-Transfer-Encoding", "binary");
+			resp.setHeader("Pragma", "no-cache");
+			resp.setHeader("Cache-Control", "private");
+			
+			// response 객체 스트림 작업
+			String filePath = req.getServletContext().getRealPath("/file");
+			
+			File file = new File(filePath+"/"+nName);
+			
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+			BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
+			
+			while(true){
+				int data = bis.read();
+				
+				if(data == -1){
+					break;			
+				}
+				
+				bos.write(data);
+			}
+			
+			bos.close();
+			bis.close();
 		}else {
 			//view 포워드
 			RequestDispatcher dispatcher = req.getRequestDispatcher(result);

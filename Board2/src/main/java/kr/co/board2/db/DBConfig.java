@@ -20,9 +20,9 @@ public class DBConfig {
 	private final String PASS = "1234";
 	
 	// ¹èÆ÷¿ë
-	//private final String HOST = "jdbc:mysql://localhost:3306/rkdxogh1987";
-	//private final String USER = "timk";
-	//private final String PASS = "1234";
+//	private final String HOST = "jdbc:mysql://localhost:3306/rkdxogh1987";
+//	private final String USER = "timk";
+//	private final String PASS = "1234";
 	
 	public Connection getConnection() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
