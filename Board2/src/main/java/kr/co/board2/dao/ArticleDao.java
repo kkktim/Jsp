@@ -276,11 +276,23 @@ public class ArticleDao {
 		return result;
 	}
 	
+	public void updateArticleHit(String no) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_HIT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void updateArticleComment(String no, boolean isCom) {
 		try {
 			PreparedStatement psmt = null;
 			Connection conn = DBConfig.getInstance().getConnection();
-			if(isCom) {
+			if(isCom == true) {
 				psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_PLUS);
 			}else {
 				psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_MINUS);

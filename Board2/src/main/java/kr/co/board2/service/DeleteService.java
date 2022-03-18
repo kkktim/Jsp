@@ -21,19 +21,19 @@ public class DeleteService implements CommonService {
 		}else {
 			String no = req.getParameter("no");
 			String fid = req.getParameter("fid");
-			String dfile = req.getParameter("file");
+			String file = req.getParameter("file");
 			String nName = req.getParameter("nName");
 			
 			ArticleDao dao = ArticleDao.getInstance();
 			
-			if(dfile == null) {
+			if(file == null) {
 				dao.deleteArticle(no);
 			}else {
 				dao.deleteArticle(no);
 				dao.deleteFile(fid);
 				String path = req.getServletContext().getRealPath("/file");
-				File file = new File(path+"/"+nName);
-				file.delete();
+				File attached_file = new File(path+"/"+nName);
+				attached_file.delete();
 			}
 			
 			

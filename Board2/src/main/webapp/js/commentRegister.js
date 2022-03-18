@@ -7,13 +7,14 @@ $(function () {
 		let inputParent = $(this).children('input[name=parent]')
 		let inputUid = $(this).children('input[name=uid]')
 		let textarea = $(this).children('textarea[name=content]')
-						
+		
 		let parent = inputParent.val()
 		let uid = inputUid.val()
 		let content = textarea.val()
-						
+		
 		let jsonData = {"parent":parent, "uid":uid, "content":content}
-						
+		console.log(jsonData)
+		
 		$.ajax({
 			url: '/Board2/comment.do',
 			type: 'post',

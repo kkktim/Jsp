@@ -33,6 +33,9 @@ public class ViewService implements CommonService {
 			List<ArticleVo> comments = dao.selectComments(no);
 			req.setAttribute("comments", comments);
 			
+			//글 조회수 +1
+			ArticleDao.getInstance().updateArticleHit(no);
+			
 			return "/view.jsp";
 		}
 	}

@@ -4,51 +4,50 @@
  $(function () {
 	//댓글 수정 - 동적 이벤트 구현
 	$(document).on('click', '.comment > div > .modify', function (e) {
-	e.preventDefault();
+		e.preventDefault();
 						
-	let mode = $(this).attr('data-mode')
+		let mode = $(this).attr('data-mode')
 						
-	if(mode == 'r'){
-	//수정모드 전환
-	$(this).attr('data-mode', 'w')
+		if(mode == 'r'){
+			//수정모드 전환
+			$(this).attr('data-mode', 'w')
 							
-	let tag = $(this)
-	let textarea = tag.parent().prev()
+			let tag = $(this)
+			let textarea = tag.parent().prev()
 							
-	tag.prev().hide()
-	tag.text('수정완료')
+			tag.prev().hide()
+			tag.text('수정완료')
 							
-	textarea.attr('readonly', false).focus()
-	textarea.css({'background':'white', 'outline':'1px solid gray'})
+			textarea.attr('readonly', false).focus()
+			textarea.css({'background':'white', 'outline':'1px solid gray'})
 							
-	}else{
-	//수정완료
-	let tag = $(this)
-	tag.attr('data-mode', 'r')
-	let textarea = tag.parent().prev()
-	let content = textarea.val()
-	let no = tag.attr('data-no')
+		}else{
+			//수정완료
+			let tag = $(this)
+			tag.attr('data-mode', 'r')
+			let textarea = tag.parent().prev()
+			let content = textarea.val()
+			let no = tag.attr('data-no')
 							
-	let jsonData = {"no":no, "content":content}
-	console.log(jsonData)
+			let jsonData = {"no":no, "content":content}
+			console.log(jsonData)
 							
-	$.ajax({
-		url:'/Board2/commentUpdate.do',
-		type:'post',
-		data: jsonData,
-		dataType:'json',
-		success: function (data) {
-			if(data.result == 1){
-			alert('댓글 수정이 완료 되었습니다.')
-			//수정완료 모드로 전환
-			tag.text('수정')
-			tag.prev().show()
-			textarea.attr('readonly', true)
-			textarea.css({'background':'transparent', 'outline':'none'})
-			}
-		}//success end...
-	})//ajax end..
-	}//else end...
+			$.ajax({
+				url:'/Board2/commentUpdate.do',
+				type:'post',
+				data: jsonData,
+				dataType:'json',
+				success: function (data) {
+					if(data.result == 1){
+						alert('댓글 수정이 완료 되었습니다.')
+						//수정완료 모드로 전환
+						tag.text('수정')
+						tag.prev().show()
+						textarea.attr('readonly', true)
+						textarea.css({'background':'transparent', 'outline':'none'})
+					}
+				}//success end...
+			})//ajax end..
+		}//else end...
 	})
-					
 });//댓글 수정 끝

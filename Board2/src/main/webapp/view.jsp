@@ -7,9 +7,11 @@
     <title>글보기</title>
     <link rel="stylesheet" href="/Board2/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/Board2/js/commentDelete.js"></script>
-    <script src="/Board2/js/commentModify.js"></script>
     <script src="/Board2/js/commentRegister.js"></script>
+    <script src="/Board2/js/commentModify.js"></script>
+    <script src="/Board2/js/commentDelete.js"></script>
+    
+    
     <script>
     $(function () {
     	$('.btnDelete').click(function (e) {
@@ -22,8 +24,11 @@
 				return false;
 			}
 			
-		})
-	})
+		})//btnDelete end...
+		
+		$('')
+		
+	})//function end...
     	
     </script>
 </head>
@@ -69,7 +74,7 @@
                     	</span>
                     	<textarea name="comment" readonly>${comment.content }</textarea>
                     	<div>
-                        	<a href="#" class="del" data-no="${comment.no}">삭제</a>
+                        	<a href="#" class="del" data-no="${comment.no}" data-value="${av.no }">삭제</a>
                         	<a href="#" class="modify" data-no="${comment.no}" data-mode="r">수정</a>
                     	</div>
                 	</article>
@@ -93,7 +98,6 @@
                     </div>
                 </form>
             </section>
-
         </section>
     </div>    
 </body>

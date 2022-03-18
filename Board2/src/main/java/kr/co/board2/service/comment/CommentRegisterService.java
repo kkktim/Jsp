@@ -10,7 +10,7 @@ import kr.co.board2.controller.CommonService;
 import kr.co.board2.dao.ArticleDao;
 import kr.co.board2.vo.ArticleVo;
 
-public class CommentService implements CommonService {
+public class CommentRegisterService implements CommonService {
 
 	@Override
 	public String businessProc(HttpServletRequest req, HttpServletResponse resp) {
@@ -18,7 +18,7 @@ public class CommentService implements CommonService {
 		String parent = req.getParameter("parent");
 		String content = req.getParameter("content");
 		String regip = req.getRemoteAddr();
-			
+		
 		ArticleVo av = new ArticleVo();
 		av.setParent(parent);
 		av.setContent(content);
@@ -31,9 +31,9 @@ public class CommentService implements CommonService {
 		int no = dao.insertComment(av);
 		
 		//댓글 +1
-		dao.updateArticleComment(uid, true);
+		dao.updateArticleComment(parent, true);
 		
-		//댓글 조회
+		//댓글 수 조회
 		ArticleVo comment = dao.selectComment(no);
 		
 		//json 데이터 생성

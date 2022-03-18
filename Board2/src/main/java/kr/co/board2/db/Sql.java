@@ -77,7 +77,7 @@ public class Sql {
 	public static final String UPDATE_COMMENT = "UPDATE `Board_article` SET `content`=? WHERE `no`=?";
 	
 	public static final String DELETE_FILE = "DELETE FROM `Board_file` WHERE `fid`=?;"; 
-	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `parent`=?";
+	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `no`=?";
 	public static final String DELETE_ARTICLE = "DELETE FROM `Board_article` WHERE `no`=?"; 
 	
 }
