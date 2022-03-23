@@ -483,6 +483,16 @@ main > .info > div > .account {
 #user.login > .info > a {
     float: right;
 }
+#user > div > ul {
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+#naverIdLogin_loginButton > img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
 
 /* 회원-약관 */
 #user.terms {
@@ -600,7 +610,6 @@ main > .info > div > .account {
     background: #e9e9e9;
     color: #111;
 }
-
 
 
 /* 게시판 - 공통 */
