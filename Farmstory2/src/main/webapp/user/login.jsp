@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <script>
+	let success = ${success}
+	if(success == 103){
+		alert('로그인 후 이용 바랍니다.')
+	}
+</script>
+<script>
 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "", //내 애플리케이션 정보에 cliendId를 입력해줍니다.

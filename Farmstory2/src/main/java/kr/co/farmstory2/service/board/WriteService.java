@@ -19,13 +19,12 @@ public class WriteService implements CommonService {
 
 	@Override
 	public String businessProc(HttpServletRequest req, HttpServletResponse resp) {
-		String cate = req.getParameter("cate");
-		String type = req.getParameter("type");
-		
-		req.setAttribute("cate", cate);
-		req.setAttribute("type", type);
-		
 		if(req.getMethod().equals("GET")) {
+			String cate = req.getParameter("cate");
+			String type = req.getParameter("type");
+			
+			req.setAttribute("cate", cate);
+			req.setAttribute("type", type);
 			return "/board/write.jsp";
 		}else {
 			//multipart 전송 데이터 수신
@@ -41,7 +40,8 @@ public class WriteService implements CommonService {
 				e.printStackTrace();
 			}
 			ArticleVo av = new ArticleVo();
-			av.setType(req.getParameter("type"));
+			String cate = mr.getParameter("cate");
+			av.setType(mr.getParameter("type"));
 			System.out.println(av.getType());
 			av.setUid(mr.getParameter("uid"));
 			System.out.println(av.getUid());
@@ -65,9 +65,9 @@ public class WriteService implements CommonService {
 				ArticleDao.getInstance().insertFile(no, fname, nName);
 			}
 			
+			return "redirect:/Farmstory2/board/list.do?cate="+cate+"&type="+av.getType();
 		}
 		
-		return "/board/write.jsp";
 		
 	}//businessProc end...
 	public String renameFile(String path, String fname, String uid) {

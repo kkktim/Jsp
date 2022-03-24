@@ -13,6 +13,23 @@ public class ArticleVo {
 	private String regip;
 	private String rdate;
 	
+	//추가필드
+	private FileVo fv;
+	public FileVo getFv() {
+		return fv;
+	}
+	public void setFv(FileVo fv) {
+		this.fv = fv;
+	}
+	
+	//추가필드
+	private String nick;
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	
 	public int getNo() {
 		return no;

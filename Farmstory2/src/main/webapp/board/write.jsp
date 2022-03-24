@@ -4,9 +4,11 @@
 	<section id="board" class="write">
     	<h3>글쓰기</h3>
         <article>
-        <form action="/Farmstory2/write.do" method="post" enctype="multipart/form-data">
+        <form action="/Farmstory2/board/write.do" method="post" enctype="multipart/form-data">
         	<table>
         		<input type="hidden" name="uid" value="${sessUser.uid }"/>
+        		<input type="hidden" name="cate" value="${cate}"/>
+        		<input type="hidden" name="type" value="${type}"/>
             	<tr>
                 	<td>제목</td>
                     <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>

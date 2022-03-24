@@ -13,6 +13,9 @@ public class LoginService implements CommonService {
 	@Override
 	public String businessProc(HttpServletRequest req, HttpServletResponse resp) {
 		if(req.getMethod().equals("GET")) {
+			String success = req.getParameter("success");
+			req.setAttribute("success", success);
+			
 			return "/user/login.jsp";
 		}else {
 			String uid = req.getParameter("uid");
