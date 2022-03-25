@@ -20,7 +20,7 @@ public class ListService extends LoginService implements CommonService {
 		UserVo uv = (UserVo) sess.getAttribute("sessUser");
 		
 		if(uv == null) {
-			return "redirect:/Farmstory2/user/login.jsp?success=103";
+			return "/user/login.jsp?success=103";
 		}
 		
 		String cate = req.getParameter("cate");

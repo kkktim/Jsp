@@ -20,11 +20,12 @@ public class ViewService implements CommonService {
 		req.setAttribute("cate", cate);
 		req.setAttribute("type", type);
 		
-		ArticleVo article = ArticleDao.getInstance().selectArticle(no);
+		ArticleDao dao = ArticleDao.getInstance();
+		ArticleVo article = dao.selectArticle(no);
 		
 		req.setAttribute("article", article);
 		
-		return "/board/view.jsp?cate="+cate;
+		return "/board/view.jsp";
 	}
 
 

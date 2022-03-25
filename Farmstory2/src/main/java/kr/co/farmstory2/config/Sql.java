@@ -26,7 +26,7 @@ public class Sql {
 	// board
 	public static final String SELECT_MAX_ID   = "SELECT MAX(`no`) FROM `Board_article`";
 	public static final String SELECT_COUNT_NO = "SELECT COUNT(`no`) FROM `Board_article` WHERE `parent`=0 AND `type`=?;";
-	public static final String SELECT_FILE     = "SELECT * FROM `Board_file` WHERE `fid`=?";
+	public static final String SELECT_FILE     = "SELECT * FROM `Board_file` WHERE `parent`=?";
 	public static final String SELECT_ARTICLE_NO  = "SELECT MAX(`no`) FROM `Board_article` WHERE `type`=? AND `uid`=?;";
 	public static final String SELECT_ARTICLE  = "SELECT * FROM `Board_article` AS a "
 												+ "LEFT JOIN `Board_file` AS b "
@@ -77,9 +77,13 @@ public class Sql {
 	public static final String UPDATE_ARTICLE_HIT = "UPDATE `Board_article` SET `hit` = `hit` + 1 WHERE `id`=?";
 	public static final String UPDATE_ARTICLE_COMMENT_PLUS  = "UPDATE `Board_article` SET `comment` = `comment` + 1 WHERE `id`=?";
 	public static final String UPDATE_ARTICLE_COMMENT_MINUS = "UPDATE `Board_article` SET `comment` = `comment` - 1 WHERE `id`=?";
-	
+	public static final String UPDATE_ARTICLE = "UPDATE `Board_article` SET `title`=?, `content`=? WHERE `no`=?;";
 	public static final String UPDATE_COMMENT = "UPDATE `Board_article` SET `content`=? WHERE `id`=?";
-	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `id`=?";
+	
+	public static final String DELETE_FILE = "DELETE FROM `Board_file` WHERE `parent`=?;";
+	public static final String DELETE_COMMENT = "DELETE FROM `Board_article` WHERE `parent`=?;";
+	
+	public static final String DELETE_ARTICLE = "DELETE FROM `Board_article` WHERE `no`=?;";
 											  
 	
 }

@@ -2,6 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../_header.jsp" %>
 <jsp:include page="./inc/_${cate}.jsp"/>
+<script>
+	$(function () {
+		$('.btnDelete').click(function () {
+			let result = confirm('정말 삭제 하시겠습니까?')
+			if(result){
+				return true;
+			}else{
+				return false;
+			}
+		})
+	})
+</script>
         <section id="board" class="view">
             <h3>글보기</h3>
             <table>
@@ -27,8 +39,8 @@
             </table>
             <div>
             <c:if test="${sessUser.uid eq article.uid}">
-                <a href="#" class="btnDelete">삭제</a>
-                <a href="/Farmstory2/board/modify.do?cate=${cate}&type=${type}" class="btnModify">수정</a>
+                <a href="/Farmstory2/board/delete.do?no=${article.no}&cate=${cate}&type=${type}" class="btnDelete">삭제</a>
+                <a href="/Farmstory2/board/modify.do?cate=${cate}&type=${type}&no=${article.no}" class="btnModify">수정</a>
 			</c:if>
                 <a href="/Farmstory2/board/list.do?cate=${cate}&type=${type}" class="btnList">목록</a>
             </div>  

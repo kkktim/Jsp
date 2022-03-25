@@ -22,6 +22,7 @@ public class ArticleDao {
 	public ArticleDao() {}
 	
 	//±âº» CRUD
+	//insert
 	public void insertFile(int parent, String oName, String nName) {
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -62,7 +63,22 @@ public class ArticleDao {
 		}
 		return no;
 	}
-	
+	//select
+	public String selectFile(String no) {
+		String nName = null;
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_FILE);
+			psmt.setString(1, no);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()) {
+				nName = rs.getString(4);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return nName;
+	}
 	public int selectCountTotal(String type) {
 		int total = 0;
 		try {
@@ -176,8 +192,60 @@ public class ArticleDao {
 		}
 		return articles;
 	}
-	
-	public void updateArticle() {}
-	
-	public void deleteArticle() {}
+	//update
+	public void updateArticle(String title, String content, String no) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, no);
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//delete
+	public int deleteFile(String no) {
+		int result = 0;
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_FILE);
+			psmt.setString(1, no);
+			result = psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public String deleteComment(String no) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return selectFile(no);
+	}
+	public String deleteArticle(String no) {
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return deleteComment(no);
+	}
 }
